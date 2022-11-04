@@ -15,7 +15,6 @@ export default function App() {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log("result", result);
           if (result) {
             let currentList = [];
             // Find the items with the same starts as the input
@@ -31,7 +30,6 @@ export default function App() {
                 });
               }
             });
-            console.log("currentList", currentList);
             // Sort the unique item
             // eslint-disable-next-line
             const uniqueList = currentList.filter((value, index, self) => {
@@ -40,7 +38,6 @@ export default function App() {
                 self.map((item) => item.state).indexOf(value.state) === index
               );
             });
-            console.log("uniqueList", uniqueList);
             setResults(uniqueList);
           } else {
             setResults([]);
@@ -57,8 +54,14 @@ export default function App() {
   };
   //   Parameter pass to <ResultsList />
   const handleSelect = (item) => {
-    console.log('item', item);
-	setSelectTerm(`${item.name}, ${item.state}`);
+    setSelectTerm(`${item.name}, ${item.state}`);
+  };
+  //   Parameter pass to <Button />
+  const handleClick = () => {
+    if (selectTerm) {
+      alert(`You have selected ${selectTerm}`);
+      setSelectTerm("");
+    }
   };
   return (
     <>
@@ -74,7 +77,7 @@ export default function App() {
           onChange={onChange}
           value={selectTerm}
         />
-        <Button />
+        <Button onClick={handleClick} />
       </section>
       <section className="searching-container">
         <ResultsList items={results} onSelect={handleSelect} />
