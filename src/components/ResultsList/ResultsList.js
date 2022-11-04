@@ -25,7 +25,7 @@ export function ResultsList(props) {
             onClick={() => onSelect && onSelect(item)}
           >
             <button className="ResultsList-button">
-              {item.name}, {item.state.abbreviation}
+              {item.name}, {item.state}
             </button>
           </li>
         );

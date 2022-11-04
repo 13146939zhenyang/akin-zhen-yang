@@ -16,7 +16,6 @@ import "./Input.css";
  */
 export function Input(props) {
   const { className, value, onChange, ...otherProps } = props;
-
   const [inputValue, setInputValue] = useState(value);
   // Data would be used to API call
   const [searchValue, setSearchValue] = useState(value);
@@ -32,8 +31,9 @@ export function Input(props) {
     };
   };
   //   Debounce the API call
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSave = useCallback(
-    debounce((nextValue) => setSearchValue(nextValue), 500),
+    debounce((nextValue) => setSearchValue(nextValue), 800),
     [] // will be created only once initially
   );
 
@@ -45,9 +45,8 @@ export function Input(props) {
   }
 
   useEffect(() => {
-    if (searchValue) {
-      onChange && onChange(searchValue);
-    }
+    onChange && onChange(searchValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
   return (

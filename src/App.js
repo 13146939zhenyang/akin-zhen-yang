@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ResultsList } from "./components/ResultsList/ResultsList";
 import { Input } from "./components/Input/Input";
 import { Button } from "./components/Button/Button";
@@ -6,20 +6,8 @@ import "./App.css";
 
 const API_URL = "http://localhost:8010/proxy/suburbs.json?q=";
 
-const API_SAMPLE = [
-  { name: "Sydney South", state: { abbreviation: "NSW" } },
-  { name: "Sydney", state: { abbreviation: "NSW" } },
-  { name: "Sydney International Airport", state: { abbreviation: "NSW" } },
-  { name: "Sydney Domestic Airport", state: { abbreviation: "NSW" } },
-  { name: "Sydenham", state: { abbreviation: "VIC" } },
-];
-
 export default function App() {
-  // parameter pass to <Input />
-  const onChange = (value) => {
-    // console.log(value);
-	fecthData(value);
-  };
+  const [results, setResults] = useState([]);
   //   Fecth relate data from API and get the feedback
   const fecthData = async (query) => {
     await fetch(`${API_URL}${query}`)
@@ -27,30 +15,63 @@ export default function App() {
       .then(
         (result) => {
           console.log("result", result);
+          if (result) {
+            let currentList = [];
+            // Find the items with the same starts as the input
+            // eslint-disable-next-line
+            result.map((item) => {
+              if (
+                query.toLowerCase() ===
+                item.name.slice(0, query.length).toLowerCase()
+              ) {
+                currentList.push({
+                  name: item.name,
+                  state: item.state.abbreviation,
+                });
+              }
+            });
+            console.log("currentList", currentList);
+            // Sort the unique item
+			// eslint-disable-next-line
+            const uniqueList = currentList.filter((value, index, self) => {
+              return (
+                self.map((item) => item.name).indexOf(value.name) === index ||
+                self.map((item) => item.state).indexOf(value.state) === index
+              );
+            });
+            console.log("uniqueList", uniqueList);
+            setResults(uniqueList);
+          } else {
+            setResults([]);
+          }
         },
         (error) => {
           console.log("error", error);
         }
       );
   };
-  useEffect(() => {
-    fecthData('syd');
-  }, []);
+  // Parameter pass to <Input />
+  const onChange = (value) => {
+    fecthData(value);
+  };
   return (
     <>
       <section>
         TODO: Implement a suburb autocomplete using &lt;Input /&gt;,
         &lt;ResultsList /&gt; and &lt;Button /&gt; and data provided by the{" "}
-        <a href="http://localhost:8010/proxy/suburbs.json?q=Syd">API</a>.
+        <a href="http://localhost:8010/proxy/suburbs.json?name=Syd">API</a>.
       </section>
       <section className="searching-container">
         <div className="searching-container_item">Suburb</div>
         <Input
           className="searching-container_item"
           onChange={onChange}
+          value=""
         />
         <Button />
-        {/* <ResultsList /> */}
+      </section>
+      <section className="searching-container">
+        <ResultsList items={results} />
       </section>
     </>
   );
