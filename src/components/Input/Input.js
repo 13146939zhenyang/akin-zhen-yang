@@ -48,6 +48,9 @@ export function Input(props) {
     onChange && onChange(searchValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
 
   return (
     <input

@@ -8,6 +8,7 @@ const API_URL = "http://localhost:8010/proxy/suburbs.json?q=";
 
 export default function App() {
   const [results, setResults] = useState([]);
+  const [selectTerm, setSelectTerm] = useState("");
   //   Fecth relate data from API and get the feedback
   const fecthData = async (query) => {
     await fetch(`${API_URL}${query}`)
@@ -32,7 +33,7 @@ export default function App() {
             });
             console.log("currentList", currentList);
             // Sort the unique item
-			// eslint-disable-next-line
+            // eslint-disable-next-line
             const uniqueList = currentList.filter((value, index, self) => {
               return (
                 self.map((item) => item.name).indexOf(value.name) === index ||
@@ -54,6 +55,11 @@ export default function App() {
   const onChange = (value) => {
     fecthData(value);
   };
+  //   Parameter pass to <ResultsList />
+  const handleSelect = (item) => {
+    console.log('item', item);
+	setSelectTerm(`${item.name}, ${item.state}`);
+  };
   return (
     <>
       <section>
@@ -66,12 +72,12 @@ export default function App() {
         <Input
           className="searching-container_item"
           onChange={onChange}
-          value=""
+          value={selectTerm}
         />
         <Button />
       </section>
       <section className="searching-container">
-        <ResultsList items={results} />
+        <ResultsList items={results} onSelect={handleSelect} />
       </section>
     </>
   );
