@@ -51,19 +51,24 @@ export default function App() {
   };
   // Parameter pass to <Input />
   const onChange = (value) => {
-    fecthData(value);
+	// Reduce 1 time API call when the input is empty
+    if (value === "") {
+      setResults([]);
+    } else {
+      fecthData(value);
+    }
   };
   //   Parameter pass to <ResultsList />
   const handleSelect = (item) => {
     setSelectTerm(`${item.name}, ${item.state}`);
-	setResults([]);
+    setResults([]);
   };
   //   Parameter pass to <Button />
   const handleClick = () => {
     if (selectTerm) {
       alert(`You have selected ${selectTerm}`);
       setSelectTerm("");
-	  setResults([]);
+      setResults([]);
     }
   };
   return (
@@ -77,15 +82,16 @@ export default function App() {
       <section className="searching-container">
         <div className="searching-container_item">Suburb</div>
         <div className="searching-container_input-button-container">
-          <Input
-            onChange={onChange}
-            value={selectTerm}
-          />
+          <Input onChange={onChange} value={selectTerm} />
           <Button
             onClick={handleClick}
             className="searching-container_button"
           />
-		  <ResultsList items={results} onSelect={handleSelect} className="searching-container_resultList" />
+          <ResultsList
+            items={results}
+            onSelect={handleSelect}
+            className="searching-container_resultList"
+          />
         </div>
       </section>
     </>
