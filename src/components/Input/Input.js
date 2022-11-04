@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Input.css";
 
 /**
@@ -18,16 +18,37 @@ export function Input(props) {
   const { className, value, onChange, ...otherProps } = props;
 
   const [inputValue, setInputValue] = useState(value);
-
-  // Keep the current value, unless the parent component supplies a different "value" prop.
-  useEffect(() => {
-    setInputValue(value);
-  }, [value]);
+  // Data would be used to API call
+  const [searchValue, setSearchValue] = useState(value);
+  //   Debounce function
+  const debounce = (func, wait) => {
+    let timeout;
+    return function (...args) {
+      const context = this;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func.apply(context, args);
+      }, wait);
+    };
+  };
+  //   Debounce the API call
+  const debouncedSave = useCallback(
+    debounce((nextValue) => setSearchValue(nextValue), 500),
+    [] // will be created only once initially
+  );
 
   function handleChange(event) {
     setInputValue(event.target.value);
-    onChange && onChange(event.target.value);
+    // Use debounce to avoid too many API calls
+    const { value: nextValue } = event.target;
+    debouncedSave(nextValue);
   }
+
+  useEffect(() => {
+    if (searchValue) {
+      onChange && onChange(searchValue);
+    }
+  }, [searchValue]);
 
   return (
     <input
