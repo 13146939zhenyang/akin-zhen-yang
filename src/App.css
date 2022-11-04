@@ -1,5 +1,30 @@
+.title {
+	font-size: 1.5em;
+	text-align: center;
+	color: #333;
+}
+
 .searching-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+.searching-container_item {
+	margin-right: 20px;
+}
+.searching-container_input-button-container {
+	position: relative;
+	width: 80%;
+	max-width: 500px;
+}
+.searching-container_button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	overflow: hidden;
+}
+.searching-container_resultList {
+	position: absolute;
+	width: 100%;
 }

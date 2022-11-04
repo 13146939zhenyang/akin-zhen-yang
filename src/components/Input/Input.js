@@ -33,11 +33,13 @@ export function Input(props) {
   //   Debounce the API call
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSave = useCallback(
-    debounce((nextValue) => setSearchValue(nextValue), 800),
+    debounce((nextValue) => setSearchValue(nextValue), 300),
     [] // will be created only once initially
   );
 
   function handleChange(event) {
+	// Enable searching after clearing the previous input
+	setInputValue("");
     setInputValue(event.target.value);
     // Use debounce to avoid too many API calls
     const { value: nextValue } = event.target;

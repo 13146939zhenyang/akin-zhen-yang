@@ -56,12 +56,14 @@ export default function App() {
   //   Parameter pass to <ResultsList />
   const handleSelect = (item) => {
     setSelectTerm(`${item.name}, ${item.state}`);
+	setResults([]);
   };
   //   Parameter pass to <Button />
   const handleClick = () => {
     if (selectTerm) {
       alert(`You have selected ${selectTerm}`);
       setSelectTerm("");
+	  setResults([]);
     }
   };
   return (
@@ -71,17 +73,20 @@ export default function App() {
         &lt;ResultsList /&gt; and &lt;Button /&gt; and data provided by the{" "}
         <a href="http://localhost:8010/proxy/suburbs.json?name=Syd">API</a>.
       </section>
+      <section className="title">Zhen Yang Coding Test</section>
       <section className="searching-container">
         <div className="searching-container_item">Suburb</div>
-        <Input
-          className="searching-container_item"
-          onChange={onChange}
-          value={selectTerm}
-        />
-        <Button onClick={handleClick} />
-      </section>
-      <section className="searching-container">
-        <ResultsList items={results} onSelect={handleSelect} />
+        <div className="searching-container_input-button-container">
+          <Input
+            onChange={onChange}
+            value={selectTerm}
+          />
+          <Button
+            onClick={handleClick}
+            className="searching-container_button"
+          />
+		  <ResultsList items={results} onSelect={handleSelect} className="searching-container_resultList" />
+        </div>
       </section>
     </>
   );

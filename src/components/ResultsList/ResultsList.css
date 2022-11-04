@@ -12,7 +12,23 @@
   margin: 0;
   padding: 0.5rem 1rem;
 }
+.ResultsList .ResultsList-item:hover {
+	cursor: pointer;
+}
 
 .ResultsList .ResultsList-item:hover {
   background: #0058cc;
+}
+.ResultsList-button {
+	background-color: transparent;
+	border: none;
+	width: 100%;
+	height: 100%;
+	text-align: left;
+	padding: 0;
+	margin: 0;
+}
+.ResultsList-button:hover {
+	cursor: pointer;
+	color: #ffffff;
 }

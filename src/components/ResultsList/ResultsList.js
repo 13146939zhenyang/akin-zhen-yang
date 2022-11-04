@@ -17,7 +17,7 @@ export function ResultsList(props) {
 
   return (
     <ul className={"ResultsList " + (className || "")} {...otherProps}>
-      {items.map(function(item, index) {
+      {items.map(function (item, index) {
         return (
           <li
             key={"item" + index}
