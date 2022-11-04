@@ -70,6 +70,9 @@ export default function App() {
       setSelectTerm("");
       setResults([]);
     }
+	else {
+		alert("Please select a suburb");
+	}
   };
   return (
     <>
