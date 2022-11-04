@@ -11,13 +11,14 @@ export default function App() {
   const [selectTerm, setSelectTerm] = useState("");
   //   Fecth relate data from API and get the feedback
   const fecthData = async (query) => {
-    await fetch(`${API_URL}${query}`)
+    await fetch(`${API_URL}${query.toLowerCase()}`)
       .then((res) => res.json())
       .then(
         (result) => {
           if (result) {
             let currentList = [];
             // Find the items with the same starts as the input
+            // Only searching by the suburb name not include the state with comma divider
             // eslint-disable-next-line
             result.map((item) => {
               if (
