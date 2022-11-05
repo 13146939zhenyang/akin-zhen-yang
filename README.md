@@ -1,5 +1,16 @@
 # Frontend Coding Exercise
 
+## Tasks Report
+1. Finished the layout of the searching page.
+	1. PC: ![](pc.png).
+	2. Mobile: ![](mobile.PNG).
+2. Finished the dynamic searching function with 300ms delay debounce. When user type the keyword, the relate searching result with the same order of the typing content of the query from calling API will be displayed in <ResultList />.
+	1. ![](alert.png)
+	2. ![](select-item.png) 
+	3. ![](select-item-populate.png)
+3. Define the empty searching statement.![](empty-searching.png)
+4. Finished the comments written for each sperate function and paramter in components.
+
 ## Summary
 
 Implement an auto-complete field that uses suburb information from postcodeapi.com.au to suggest suburb names and allow the user to make a suggestion. This design is similar to the input seen on https://google.com or the [ABC homepage](www.abc.net.au) location selector component.
