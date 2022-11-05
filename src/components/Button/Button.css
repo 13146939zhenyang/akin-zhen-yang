@@ -1,12 +1,13 @@
 .Button {
-  background: #fdc605;
-  border: none;
+	background: #fdc605;
+	border: none;
 }
 
 .Button svg {
-  height: 1.5rem;
-  width: 1.5rem;
+	height: 1.5rem;
+	width: 1.5rem;
 }
+
 .Button:hover {
 	cursor: pointer;
 }

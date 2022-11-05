@@ -13,23 +13,23 @@ import "./ResultsList.css";
  * @prop {mixed} ... All other props will be forwarded to the container DOM node.
  */
 export function ResultsList(props) {
-  const { className, onSelect, items, ...otherProps } = props;
+	const { className, onSelect, items, ...otherProps } = props;
 
-  return (
-    <ul className={"ResultsList " + (className || "")} {...otherProps}>
-      {items.map(function (item, index) {
-        return (
-          <li
-            key={"item" + index}
-            className="ResultsList-item"
-            onClick={() => onSelect && onSelect(item)}
-          >
-            <button className="ResultsList-button">
-              {item.name}, {item.state}
-            </button>
-          </li>
-        );
-      })}
-    </ul>
-  );
+	return (
+		<ul className={"ResultsList " + (className || "")} {...otherProps}>
+			{items.map(function (item, index) {
+				return (
+					<li
+						key={"item" + index}
+						className="ResultsList-item"
+						onClick={() => onSelect && onSelect(item)}
+					>
+						<button className="ResultsList-button">
+							{item.name}, {item.state}
+						</button>
+					</li>
+				);
+			})}
+		</ul>
+	);
 }

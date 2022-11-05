@@ -13,18 +13,18 @@ import "./Button.css";
 
  */
 export function Button(props) {
-  const { onClick, className, ...otherProps } = props;
+	const { onClick, className, ...otherProps } = props;
 
-  return (
-    <button
-      type="button"
-      className={"Button " + (className || "")}
-      onClick={onClick}
-      {...otherProps}
-    >
-      <svg viewBox="0 0 24 24" width="24" height="16">
-        <use xlinkHref={iconPath + "#dls-icon-arrow-right"} />
-      </svg>
-    </button>
-  );
+	return (
+		<button
+			type="button"
+			className={"Button " + (className || "")}
+			onClick={onClick}
+			{...otherProps}
+		>
+			<svg viewBox="0 0 24 24" width="24" height="16">
+				<use xlinkHref={iconPath + "#dls-icon-arrow-right"} />
+			</svg>
+		</button>
+	);
 }
