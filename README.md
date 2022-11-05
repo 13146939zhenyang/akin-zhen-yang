@@ -10,6 +10,7 @@
 	3. ![](select-item-populate.png)
 3. Define the empty searching statement.![](empty-searching.png)
 4. Finished the comments written for each sperate function and paramter in components.
+5. The structure and the parameters in origin repo is not modified.
 
 ## Summary
 
